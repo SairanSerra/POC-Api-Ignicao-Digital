@@ -27,7 +27,7 @@ class ClientRepository implements ClientRepositoryInterface
             $query->where('idUser', $idUser);
 
             if($name){
-                $query->where('name', $name);
+                $query->where('name',  'like',"%{$name}%");
             }
 
             if($tags){
@@ -35,7 +35,7 @@ class ClientRepository implements ClientRepositoryInterface
             }
 
             if($email){
-                $query->where('email', $email);
+                $query->where('email', 'like', "%{$email}%");
             }
 
             if($idClient){
