@@ -21,8 +21,11 @@ class LoginService
 
         if($credentialsInvalid) throw new CustomException('Credenciais inválidas ou conta não cadastrada', 401);
 
+        $user = auth()->user();
+
         $content = [
-            'token' => $token
+            'token' => $token,
+            'user'  => $user
         ];
 
         return $this->defaultResponse->isSuccessWithContent('Usuário logado com sucesso', 200, $content);

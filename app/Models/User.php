@@ -23,6 +23,8 @@ class User extends Authenticatable implements JWTSubject
     protected $primaryKey = 'id';
     public $incrementing = false;
 
+    protected $hidden = ['password'];
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
