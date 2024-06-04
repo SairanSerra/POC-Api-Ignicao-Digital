@@ -21,7 +21,7 @@ class ClientRepository implements ClientRepositoryInterface
 
             $idClient = $payload['id'] ?? false;
             $tags = $payload['tags'] ?? false;
-            $idEmail = $payload['email'] ?? false;
+            $email = $payload['email'] ?? false;
             $name = $payload['name'] ?? false;
 
             $query->where('idUser', $idUser);
@@ -34,8 +34,8 @@ class ClientRepository implements ClientRepositoryInterface
                 $query->where('tags', 'like', "%{$tags}%");
             }
 
-            if($idEmail){
-                $query->where('email', $idEmail);
+            if($email){
+                $query->where('email', $email);
             }
 
             if($idClient){
