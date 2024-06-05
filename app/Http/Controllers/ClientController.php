@@ -30,7 +30,7 @@ class ClientController extends Controller
 
     public function index(ListClientRequest $request)
     {
-        $payload = $request->only(['id', 'tags', 'email', 'user']);
+        $payload = $request->only(['id', 'tags', 'name', 'email', 'user']);
         return $this->listClientsService->index($payload);
 
     }
