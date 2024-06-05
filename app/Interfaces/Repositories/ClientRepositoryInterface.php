@@ -14,6 +14,7 @@ interface ClientRepositoryInterface
     public function delete(string $idClient, string $idUser);
 
     public function findByIdClientAndIdClient(string $idClient, string $idUser);
+    public function findByEmail(string $email);
 
 
 }

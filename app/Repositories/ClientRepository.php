@@ -80,6 +80,11 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
+    public function findByEmail(string $email){
+        $client = $this->client->where('email', $email)->first();
+        return $client;
+    }
+
 
 
 }
