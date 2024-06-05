@@ -4,12 +4,19 @@ WORKDIR /var/www/html
 
 ENV SSL_MODE off
 
-COPY . .
+COPY . /var/www/html
+
+RUN chown -R www-data:www-data /var/www/html/storage
+RUN chmod -R 777 /var/www/html/storage
+
+# Ensure the correct ownership and permissions for the public directory
+RUN chown -R www-data:www-data /var/www/html/public
+RUN chmod -R 777 /var/www/html/public
 
 RUN composer install --no-dev  --optimize-autoloader --prefer-dist --ignore-platform-reqs
 
-# Fix session
-RUN chmod -Rf 777 /var/www/html/storage
+# Ensure the correct ownership and permissions for the storage directory
+
 
 RUN php artisan cache:clear
 
