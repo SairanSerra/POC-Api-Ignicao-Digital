@@ -29,7 +29,7 @@ class UpdateClientRequest extends FormRequest
             'id'     => ['required', 'uuid'],
             'name'   => ['required'],
             'email'  => ['required'],
-            'tags'   => ['string']
+            'tags'   => ['string', 'nullable']
         ];
     }
 

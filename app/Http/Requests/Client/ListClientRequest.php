@@ -26,10 +26,10 @@ class ListClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'     => ['uuid'],
-            'tags'   => ['string'],
-            'name'   => ['string'],
-            'email'  => ['string']
+            'id'     => ['uuid', 'nullable'],
+            'tags'   => ['string', 'nullable'],
+            'name'   => ['string', 'nullable'],
+            'email'  => ['string', 'nullable']
         ];
     }
 

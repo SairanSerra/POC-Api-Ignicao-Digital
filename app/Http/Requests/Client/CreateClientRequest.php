@@ -28,7 +28,7 @@ class CreateClientRequest extends FormRequest
         return [
             'name'   => ['required'],
             'email'  => ['required'],
-            'tags'   => ['string']
+            'tags'   => ['string', 'nullable']
         ];
     }
 
