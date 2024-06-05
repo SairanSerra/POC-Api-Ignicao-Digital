@@ -9,8 +9,11 @@ COPY . /var/www/html
 RUN composer install --no-dev  --optimize-autoloader --prefer-dist --ignore-platform-reqs
 
 
+RUN chown -R www-data:www-data /var/www/html/storage
 RUN chmod -R 777 /var/www/html/storage
-RUN chmod -R 777 /var/www/html/public
+
+# Ensure the correct ownership and permissions for the public directory
+RUN chown -R www-data:www-data /var/www/html/public
 RUN chmod -R 777 /var/www/html/public
 
 RUN php artisan cache:clear
