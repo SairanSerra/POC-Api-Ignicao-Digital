@@ -1,0 +1,11 @@
+version: '3.5'
+
+services:
+  cadastro-client-api:
+    container_name: cadastro-client-api
+    image: sairan/cadastro-cliente:latest
+    restart: always
+    env_file:
+      - stack.env
+    ports:
+      - 3002:80
