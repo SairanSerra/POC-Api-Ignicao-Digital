@@ -8,7 +8,7 @@ COPY . .
 
 RUN composer install --no-dev  --optimize-autoloader --prefer-dist --ignore-platform-reqs
 
-RUN chown -R 9999:9999 /var/www/html/
+
 RUN chmod -R 777 /var/www/html/storage
 RUN chmod -R 777 /var/www/html/public
 RUN chmod -R 777 /var/www/html/public
