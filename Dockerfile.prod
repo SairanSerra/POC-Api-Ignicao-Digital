@@ -20,6 +20,5 @@ RUN php artisan view:cache
 
 RUN php artisan config:clear
 
-RUN chown -R application:application .
 # Fix session
 RUN chmod -Rf 777 /var/www/html/storage
