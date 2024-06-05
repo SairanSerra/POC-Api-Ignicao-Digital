@@ -1,33 +1,36 @@
-FROM serversideup/php:7.4-fpm-nginx
+FROM webdevops/php-nginx:7.4-alpine
 
-WORKDIR /var/www/html
+# Install Laravel framework system requirements (https://laravel.com/docs/8.x/deployment#optimizing-configuration-loading)
+RUN apk add oniguruma-dev libxml2-dev
+RUN docker-php-ext-install \
+        bcmath \
+        ctype \
+        fileinfo \
+        json \
+        mbstring \
+        pdo_mysql \
+        tokenizer \
+        xml
 
-ENV SSL_MODE off
+# Copy Composer binary from the Composer official Docker image
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY . /var/www/html
+ENV WEB_DOCUMENT_ROOT /app/public
+ENV APP_ENV production
+WORKDIR /app
+COPY . .
 
-RUN chown -R www-data:www-data /var/www/html/storage
-RUN chmod -R 777 /var/www/html/storage
-
-# Ensure the correct ownership and permissions for the public directory
-RUN chown -R www-data:www-data /var/www/html/public
-RUN chmod -R 777 /var/www/html/public
-
-RUN composer install --no-dev  --optimize-autoloader --prefer-dist --ignore-platform-reqs
-
-# Ensure the correct ownership and permissions for the storage directory
-
-
-RUN php artisan cache:clear
-
-RUN php artisan optimize
-
-RUN php artisan route:cache
-
+RUN composer install --no-interaction
+#--optimize-autoloader --no-dev
+# Optimizing Configuration loading
 RUN php artisan config:cache
-
+# Optimizing Route loading
+RUN php artisan route:cache
+# Optimizing View loading
 RUN php artisan view:cache
-
+# clear config cache
 RUN php artisan config:clear
 
-
+RUN chown -R application:application .
+# Fix session
+RUN chmod -Rf 777 /app/storage
