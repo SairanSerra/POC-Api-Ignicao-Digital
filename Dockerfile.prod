@@ -4,7 +4,7 @@ WORKDIR /var/www/html
 
 ENV SSL_MODE off
 
-COPY . .
+COPY . /var/www/html
 
 RUN composer install --no-dev  --optimize-autoloader --prefer-dist --ignore-platform-reqs
 
